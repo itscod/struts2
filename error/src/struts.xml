@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+		        <!--Configuration for the default packet.-->
+
+		<package name="default" namespace="/"  extends="struts-default,json-default">
+			
+			<!-- 登录 -->
+			<action name="loginAction" class="zzm.action.LoginAction" method="login">
+
+				<result name="userlogin" type= "redirectAction">Iteration</result>
+				
+				<result name="adminlogin">/backstageMS.jsp</result>
+
+				<result name="loginerror">/login.jsp</result>
+
+			</action>
+			<!-- 进商品主页 -->
+			<action name="Iteration" class="cn.Iteration">
+
+				<result>/boot.jsp</result>
+
+			</action>
+			<!-- 加入购物车 -->
+			<action name="PurchaseAction" class="zsy.action.PurchaseAction">
+ 
+				<result name="yes" type= "redirectAction">Iteration</result>
+
+			</action>
+			<!-- 购物车 -->
+			<action name="ShoppingCart" class="zsy.action.ShoppingCart">
+ 
+				<result>/ShoppingCart.jsp</result>
+
+			</action>
+			<!-- 下单 -->
+			<action name="Consumption" class="zsy.action.Consumption">
+ 
+				<result type="redirectAction">ShoppingCart</result>
+
+			</action>
+			<!-- 删除购物车 -->
+			<action name="DeleteCspt" class="zsy.action.DeleteCspt">
+ 
+				<result type="redirectAction">ShoppingCart</result>
+
+			</action>
+			<!-- 购买记录 -->
+			<action name="OrderAction" class="zsy.action.OrderAction">
+ 
+				<result>/PurchaseRecord.jsp</result>
+
+			</action>
+			<action name="Search" class="zsy.action.Search">
+ 
+				<result>/PurchaseRecord.jsp</result>
+
+			</action>
+			<!-- 个人信息 -->
+			<action name="Personal" class="zsy.action.Personal">
+ 
+				<result>/Personal.jsp</result>
+
+			</action>
+			<!-- 修改个人信息 -->
+			<action name="Modify" class="zsy.action.Modify">
+ 
+				<result type="redirectAction">Personal</result>
+
+			</action>
+			<!-- 用户注册 -->
+			<action name="registerAction" class="zzm.action.RegisterAction" method="addUser">
+
+				<result name="add">/login.jsp</result>
+
+				<result name="error">/register.jsp</result>
+
+			</action>
+			
+			<!-- 注销 -->
+			<action name="logout" class="zzm.action.LogoutAction">
+
+				<result name="success">/login.jsp</result>
+
+			</action>
+			
+			<!-- 管理员表数据的查看，增加，修改，删除 -->
+			<action name="admin_*" class="zzm.action.AdminAction" method="{1}">
+
+				<result name="add" type="redirectAction">admin_findAll</result>
+				
+				<result name="delete" type="redirectAction">admin_findAll</result>
+				
+				<result name="edit" type="redirectAction">admin_findAll</result>
+				
+				<result name="value">/modAdmin.jsp</result>
+				
+				<result name="admin" type="json">
+
+					<param name="root">jsonObject</param>
+				
+				</result>
+
+				<result name="error">/error.jsp</result>
+
+			</action>
+			
+			
+			<!-- 商品表数据的查看，增加，修改，删除 -->
+			<action name="fruit_*" class="zzm.action.FruitAction" method="{1}">
+
+				<result name="add" type="redirectAction">fruit_findAll</result>
+				
+				<result name="delete" type="redirectAction">fruit_findAll</result>
+				
+				<result name="edit" type="redirectAction">fruit_findAll</result>
+				
+				<result name="value">/modFruit.jsp</result>
+				
+				<result name="fruit" type="json">
+
+					<param name="root">jsonObject</param>
+				
+				</result>
+
+				<result name="error">/error.jsp</result>
+
+			</action>
+			
+			
+			<!-- 商品库存表数据的查看，修改 -->
+			<action name="stock_*" class="zzm.action.StockAction" method="{1}">
+
+				<result name="edit" type="redirectAction">stock_stock</result>
+				
+				<result name="value">/modStock.jsp</result>
+				
+				<result name="stock" type="json">
+
+					<param name="root">jsonObject</param>
+					
+				</result>
+
+				<result name="error">/error.jsp</result>
+
+			</action>
+			
+	</package>
+
+</struts> 
